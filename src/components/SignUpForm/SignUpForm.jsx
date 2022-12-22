@@ -5,6 +5,7 @@ import {
   createUserDocFromAuth,
 } from "../../utils/firebase/firebase.utils";
 import FormInput from "../FormInput/FormInput";
+import Button from "../Button/Button";
 
 const defaultFields = {
   displayName: "",
@@ -101,7 +102,7 @@ const SignUpForm = () => {
             required: true,
           }}
         />
-        <button type="submit">Sign up</button>
+        <Button type="submit">Sign up</Button>
       </form>
     </div>
   );
