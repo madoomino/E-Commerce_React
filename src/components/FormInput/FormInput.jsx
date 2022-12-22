@@ -1,16 +1,16 @@
 import classes from "./FormInput.module.scss";
-const FormInput = ({ label, htmlFor, inputOptions }) => {
+const FormInput = ({ labelOptions, inputOptions }) => {
   return (
     <div className={classes.group}>
       <input {...inputOptions} className={classes["form-input"]} />
-      {label ? (
+      {labelOptions.label ? (
         <label
-          htmlFor={htmlFor}
+          htmlFor={labelOptions.htmlFor}
           className={`${inputOptions.value.length ? classes.shrink : ""} ${
             classes["form-input-label"]
           }`}
         >
-          {label}
+          {labelOptions.label}
         </label>
       ) : null}
     </div>

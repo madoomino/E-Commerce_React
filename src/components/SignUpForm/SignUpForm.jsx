@@ -1,3 +1,4 @@
+import classes from "./SignUpForm.module.scss";
 import { useState } from "react";
 import {
   createAuthUserWithEmailAndPassword,
@@ -44,12 +45,15 @@ const SignUpForm = () => {
     });
   };
   return (
-    <>
-      <h1>Sign up with your email and password</h1>
+    <div className={classes["sign-up-container"]}>
+      <h2>Don't have an account?</h2>
+      <span>Sign up with your email and password</span>
       <form onSubmit={submitHandler}>
         <FormInput
-          htmlFor="displayName"
-          label="Display Name"
+          labelOptions={{
+            htmlFor: "displayName",
+            label: "Display Name",
+          }}
           inputOptions={{
             value: displayName,
             onChange: changeHandler,
@@ -59,8 +63,10 @@ const SignUpForm = () => {
           }}
         />
         <FormInput
-          htmlFor="email"
-          label="Email"
+          labelOptions={{
+            htmlFor: "email",
+            label: "Email",
+          }}
           inputOptions={{
             value: email,
             onChange: changeHandler,
@@ -70,8 +76,10 @@ const SignUpForm = () => {
           }}
         />
         <FormInput
-          htmlFor="password"
-          label="Password"
+          labelOptions={{
+            htmlFor: "password",
+            label: "Password",
+          }}
           inputOptions={{
             value: password,
             onChange: changeHandler,
@@ -81,8 +89,10 @@ const SignUpForm = () => {
           }}
         />
         <FormInput
-          htmlFor="confirmPassword"
-          label="Confirm Password"
+          labelOptions={{
+            htmlFor: "confirmPassword",
+            label: "Confirm Password",
+          }}
           inputOptions={{
             value: confirmPassword,
             onChange: changeHandler,
@@ -93,7 +103,7 @@ const SignUpForm = () => {
         />
         <button type="submit">Sign up</button>
       </form>
-    </>
+    </div>
   );
 };
 export default SignUpForm;
