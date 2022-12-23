@@ -1,11 +1,10 @@
 import SignInForm from "../../components/SignInForm/SignInForm";
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
+import classes from "./Login.module.scss";
 
 const Login = () => {
   return (
-    <div>
-      <h1>Log in Page</h1>
-
+    <div className={classes.container}>
       <SignInForm />
       <SignUpForm />
     </div>
