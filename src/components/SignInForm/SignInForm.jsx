@@ -2,6 +2,7 @@ import classes from "./SignInForm.module.scss";
 import FormInput from "../FormInput/FormInput";
 import { useState, useEffect } from "react";
 import Button from "../Button/Button";
+import AlertComponent from "../Alert/Alert";
 import {
   signInWithGooglePopup,
   createUserDocFromAuth,
@@ -83,13 +84,15 @@ const SignInForm = () => {
             required: true,
           }}
         />
-        <p
-          style={{
-            color: `${signedIn === "Signed in successfully" ? "green" : "red"}`,
-          }}
-        >
-          {signedIn}
-        </p>
+        {signedIn.length > 0 && (
+          <AlertComponent
+            status={`${
+              signedIn === "Signed in successfully" ? "success" : "error"
+            }`}
+          >
+            {signedIn}
+          </AlertComponent>
+        )}
         <div className={classes["btns-container"]}>
           <Button>Login</Button>
           <Button onClick={logGoogleUserPopup} buttonType="google">

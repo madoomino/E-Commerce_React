@@ -1,5 +1,6 @@
 import classes from "./SignUpForm.module.scss";
-import { useState } from "react";
+import AlertComponent from "../Alert/Alert";
+import { useState, useEffect } from "react";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocFromAuth,
@@ -12,10 +13,12 @@ const defaultFields = {
   email: "",
   password: "",
   confirmPassword: "",
+  signedInMessage: "",
 };
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFields);
-  const { displayName, email, password, confirmPassword } = formFields;
+  const { displayName, email, password, confirmPassword, signedInMessage } =
+    formFields;
 
   const resetFormFields = () => {
     setFormFields(defaultFields);
@@ -23,17 +26,31 @@ const SignUpForm = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) return;
+    if (password !== confirmPassword) {
+      setFormFields((prevState) => ({
+        ...prevState,
+        signedInMessage: "Password doesn't match",
+      }));
+      return;
+    }
     try {
       const { user } = await createAuthUserWithEmailAndPassword(
         email,
         password
       );
-      const userDoc = await createUserDocFromAuth(user, { displayName });
+      await createUserDocFromAuth(user, { displayName });
       resetFormFields();
+      setFormFields((prevState) => ({
+        ...prevState,
+        signedInMessage: "Signed up successfully",
+      }));
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
-        alert("Email is already in use");
+        setFormFields((prevState) => ({
+          ...prevState,
+          signedInMessage: "Email is already in use",
+        }));
+        return;
       }
       console.error(error);
     }
@@ -45,6 +62,18 @@ const SignUpForm = () => {
       return { ...prevState, [name]: value };
     });
   };
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setFormFields((prevState) => ({
+        ...prevState,
+        signedInMessage: "",
+      }));
+    }, 3000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [signedInMessage]);
   return (
     <div className={classes["sign-up-container"]}>
       <h2>Don't have an account?</h2>
@@ -102,6 +131,15 @@ const SignUpForm = () => {
             required: true,
           }}
         />
+        {signedInMessage.length > 0 && (
+          <AlertComponent
+            status={`${
+              signedInMessage === "Signed up successfully" ? "success" : "error"
+            }`}
+          >
+            {signedInMessage}
+          </AlertComponent>
+        )}
         <Button type="submit">Sign up</Button>
       </form>
     </div>
