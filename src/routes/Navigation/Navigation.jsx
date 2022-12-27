@@ -3,10 +3,16 @@ import Logo from "../../assets/crown.svg";
 import classes from "./Navigation.module.scss";
 import { UserContext } from "../../contexts/UserContext";
 import { useContext } from "react";
+import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 const Navigation = () => {
-  const { currentUser } = useContext(UserContext);
-  console.log(currentUser);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+
+  const signOutHandler = async () => {
+    await signOutUser();
+    setCurrentUser(null);
+  };
+
   return (
     <>
       <nav className={classes["navigation"]}>
@@ -14,8 +20,16 @@ const Navigation = () => {
           <img src={Logo} className={classes["logo"]} />
         </Link>
         <ul className={classes["nav-links-container"]}>
-          <Link to="/shop">Shop</Link>
-          <Link to="/login">Login</Link>
+          <Link to="/shop">SHOP</Link>
+          {currentUser ? (
+            <span className={classes["nav-link"]} onClick={signOutHandler}>
+              SIGN OUT
+            </span>
+          ) : (
+            <Link to="/login" className={classes["nav-link"]}>
+              SIGN IN
+            </Link>
+          )}
         </ul>
       </nav>
       <Outlet />

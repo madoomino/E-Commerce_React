@@ -1,6 +1,7 @@
 import classes from "./SignUpForm.module.scss";
 import AlertComponent from "../Alert/Alert";
-import { useState, useEffect } from "react";
+import { UserContext } from "../../contexts/UserContext";
+import { useState, useEffect, useContext } from "react";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocFromAuth,
@@ -24,6 +25,8 @@ const SignUpForm = () => {
     setFormFields(defaultFields);
   };
 
+  const { setCurrentUser } = useContext(UserContext);
+
   const submitHandler = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
@@ -38,6 +41,7 @@ const SignUpForm = () => {
         email,
         password
       );
+      setCurrentUser(user);
       await createUserDocFromAuth(user, { displayName });
       resetFormFields();
       setFormFields((prevState) => ({
