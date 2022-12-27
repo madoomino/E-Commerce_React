@@ -1,8 +1,9 @@
 import classes from "./SignInForm.module.scss";
 import FormInput from "../FormInput/FormInput";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Button from "../Button/Button";
 import AlertComponent from "../Alert/Alert";
+import { UserContext } from "../../contexts/UserContext";
 import {
   signInWithGooglePopup,
   createUserDocFromAuth,
@@ -20,6 +21,8 @@ const SignInForm = () => {
     signedIn: "",
   });
 
+  const { setCurrentUser } = useContext(UserContext);
+
   const { email, password, signedIn } = formFields;
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -30,6 +33,7 @@ const SignInForm = () => {
         ...prevState,
         signedIn: "Signed in successfully",
       }));
+      setCurrentUser(user);
     } catch (error) {
       if (
         error.code === "auth/user-not-found" ||
