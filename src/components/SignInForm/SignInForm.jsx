@@ -1,18 +1,16 @@
-import classes from "./SignInForm.module.scss";
-import FormInput from "../FormInput/FormInput";
-import { useState, useEffect, useContext } from "react";
-import Button from "../Button/Button";
-import AlertComponent from "../Alert/Alert";
-import { UserContext } from "../../contexts/UserContext";
+import { useEffect, useState } from "react";
 import {
-  signInWithGooglePopup,
   createUserDocFromAuth,
   logInWithEmailAndPassword,
+  signInWithGooglePopup,
 } from "../../utils/firebase/firebase.utils";
+import AlertComponent from "../Alert/Alert";
+import Button from "../Button/Button";
+import FormInput from "../FormInput/FormInput";
+import classes from "./SignInForm.module.scss";
 const SignInForm = () => {
   const logGoogleUserPopup = async () => {
-    const { user } = await signInWithGooglePopup();
-    const userDocRef = await createUserDocFromAuth(user);
+    await signInWithGooglePopup();
   };
 
   const [formFields, setFormFields] = useState({
@@ -20,8 +18,6 @@ const SignInForm = () => {
     password: "",
     signedIn: "",
   });
-
-  const { setCurrentUser } = useContext(UserContext);
 
   const { email, password, signedIn } = formFields;
   const submitHandler = async (e) => {
@@ -33,7 +29,6 @@ const SignInForm = () => {
         ...prevState,
         signedIn: "Signed in successfully",
       }));
-      setCurrentUser(user);
     } catch (error) {
       if (
         error.code === "auth/user-not-found" ||
@@ -99,8 +94,12 @@ const SignInForm = () => {
         )}
         <div className={classes["btns-container"]}>
           <Button>Login</Button>
-          <Button onClick={logGoogleUserPopup} buttonType="google">
-            Log in with Google
+          <Button
+            onClick={logGoogleUserPopup}
+            buttonType="google"
+            type="button"
+          >
+            SIGN IN WITH GOOGLE
           </Button>
         </div>
       </form>
