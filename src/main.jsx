@@ -1,20 +1,24 @@
-import React from "react";
+import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import UserProvider from "./contexts/UserContext";
 
 import App from "./App";
-import "./index.scss";
 import ProductsProvider from "./contexts/ProductsContext";
+import CartProvider from "./contexts/ShowCart";
+
+import "./index.scss";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  <StrictMode>
     <BrowserRouter>
       <UserProvider>
         <ProductsProvider>
-          <App />
+          <CartProvider>
+            <App />
+          </CartProvider>
         </ProductsProvider>
       </UserProvider>
     </BrowserRouter>
-  </React.StrictMode>
+  </StrictMode>
 );
