@@ -1,16 +1,16 @@
-import { Outlet, Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, Outlet } from "react-router-dom";
 import Logo from "../../assets/crown.svg";
-import classes from "./Navigation.module.scss";
-import { UserContext } from "../../contexts/UserContext";
-import { useContext, useState } from "react";
-import { signOutUser } from "../../utils/firebase/firebase.utils";
-import CartIcon from "../../components/Cart-Icon/CartIcon";
 import CartDropDown from "../../components/CartDropDown/CartDropDown";
-import { ShowCartContext } from "../../contexts/ShowCart";
+import CartIcon from "../../components/CartIcon/CartIcon";
+import { CartContext } from "../../contexts/CartContext";
+import { UserContext } from "../../contexts/UserContext";
+import { signOutUser } from "../../utils/firebase/firebase.utils";
+import classes from "./Navigation.module.scss";
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
-  const { showCart } = useContext(ShowCartContext);
+  const { isCartOpen } = useContext(CartContext);
 
   return (
     <>
@@ -31,7 +31,7 @@ const Navigation = () => {
           )}
           <CartIcon />
         </ul>
-        {showCart && <CartDropDown />}
+        {isCartOpen && <CartDropDown />}
       </nav>
       <Outlet />
     </>
