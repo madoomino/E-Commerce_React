@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
-  createUserDocFromAuth,
-  logInWithEmailAndPassword,
+  AuthWithEmailAndPassword,
   signInWithGooglePopup,
 } from "../../utils/firebase/firebase.utils";
-import AlertComponent from "../Alert/Alert";
-import Button from "../Button/Button";
+import Button, { BUTTON_TYPE_CLASSES } from "../Button/Button";
 import FormInput from "../FormInput/FormInput";
-import classes from "./SignInForm.module.scss";
+import { ButtonsContainer, SignInContainer } from "./SignInForm.styles";
 const SignInForm = () => {
   const logGoogleUserPopup = async () => {
     await signInWithGooglePopup();
@@ -19,15 +17,14 @@ const SignInForm = () => {
     signedIn: "",
   });
 
-  const { email, password, signedIn } = formFields;
+  const { email, password } = formFields;
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const { user } = await logInWithEmailAndPassword(email, password);
+      const { user } = await AuthWithEmailAndPassword(email, password);
 
       setFormFields((prevState) => ({
         ...prevState,
-        signedIn: "Signed in successfully",
       }));
     } catch (error) {
       if (
@@ -36,7 +33,6 @@ const SignInForm = () => {
       ) {
         setFormFields((prevState) => ({
           ...prevState,
-          signedIn: "Signing in failed",
         }));
         return;
       }
@@ -48,20 +44,11 @@ const SignInForm = () => {
       return { ...formFields, [name]: value };
     });
   };
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setFormFields((prevState) => ({
-        ...prevState,
-        signedIn: "",
-      }));
-    }, 3000);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [signedIn]);
+
   return (
-    <div className={classes.container}>
-      <h2>Log in with your email and password</h2>
+    <SignInContainer>
+      <h2>Already have an account?</h2>
+      <span>Sign in with your email and password</span>
       <form onSubmit={submitHandler}>
         <FormInput
           labelOptions={{ htmlFor: "email", label: "Email" }}
@@ -83,27 +70,19 @@ const SignInForm = () => {
             required: true,
           }}
         />
-        {signedIn.length > 0 && (
-          <AlertComponent
-            status={`${
-              signedIn === "Signed in successfully" ? "success" : "error"
-            }`}
-          >
-            {signedIn}
-          </AlertComponent>
-        )}
-        <div className={classes["btns-container"]}>
-          <Button>Login</Button>
+
+        <ButtonsContainer>
+          <Button>LOGIN</Button>
           <Button
             onClick={logGoogleUserPopup}
-            buttonType="google"
+            buttonType={BUTTON_TYPE_CLASSES.google}
             type="button"
           >
-            SIGN IN WITH GOOGLE
+            GOOGLE
           </Button>
-        </div>
+        </ButtonsContainer>
       </form>
-    </div>
+    </SignInContainer>
   );
 };
 export default SignInForm;

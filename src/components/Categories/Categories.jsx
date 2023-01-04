@@ -1,14 +1,14 @@
 import categories from "../../../categories.json";
-import classes from "./Categories.module.scss";
 import Category from "../Category/Category";
+import { CategoriesContainer } from "./Categories.styles";
 
 const Categories = () => {
   return (
-    <div className={classes["categories-container"]}>
+    <CategoriesContainer>
       {categories.map((category) => (
-        <Category {...category} key={category.id} />
+        <Category key={category.id} {...category} />
       ))}
-    </div>
+    </CategoriesContainer>
   );
 };
 

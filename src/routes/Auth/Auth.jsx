@@ -1,14 +1,15 @@
 import SignInForm from "../../components/SignInForm/SignInForm";
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
-import classes from "./Login.module.scss";
 
-const Login = () => {
+import { AuthenticationContainer } from "./Auth.styles";
+
+const Auth = () => {
   return (
-    <div className={classes.container}>
+    <AuthenticationContainer>
       <SignInForm />
       <SignUpForm />
-    </div>
+    </AuthenticationContainer>
   );
 };
 
-export default Login;
+export default Auth;

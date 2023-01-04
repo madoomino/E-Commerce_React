@@ -1,24 +1,21 @@
-import classes from "./SignUpForm.module.scss";
-import AlertComponent from "../Alert/Alert";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocFromAuth,
 } from "../../utils/firebase/firebase.utils";
-import FormInput from "../FormInput/FormInput";
 import Button from "../Button/Button";
+import FormInput from "../FormInput/FormInput";
+import { SignUpContainer } from "./SignUpForm.styles";
 
 const defaultFields = {
   displayName: "",
   email: "",
   password: "",
   confirmPassword: "",
-  signedInMessage: "",
 };
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFields);
-  const { displayName, email, password, confirmPassword, signedInMessage } =
-    formFields;
+  const { displayName, email, password, confirmPassword } = formFields;
 
   const resetFormFields = () => {
     setFormFields(defaultFields);
@@ -29,7 +26,6 @@ const SignUpForm = () => {
     if (password !== confirmPassword) {
       setFormFields((prevState) => ({
         ...prevState,
-        signedInMessage: "Password doesn't match",
       }));
       return;
     }
@@ -63,19 +59,8 @@ const SignUpForm = () => {
     });
   };
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setFormFields((prevState) => ({
-        ...prevState,
-        signedInMessage: "",
-      }));
-    }, 3000);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [signedInMessage]);
   return (
-    <div className={classes["sign-up-container"]}>
+    <SignUpContainer>
       <h2>Don't have an account?</h2>
       <span>Sign up with your email and password</span>
       <form onSubmit={submitHandler}>
@@ -131,18 +116,10 @@ const SignUpForm = () => {
             required: true,
           }}
         />
-        {signedInMessage.length > 0 && (
-          <AlertComponent
-            status={`${
-              signedInMessage === "Signed up successfully" ? "success" : "error"
-            }`}
-          >
-            {signedInMessage}
-          </AlertComponent>
-        )}
+
         <Button type="submit">Sign up</Button>
       </form>
-    </div>
+    </SignUpContainer>
   );
 };
 export default SignUpForm;

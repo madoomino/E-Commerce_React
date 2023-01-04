@@ -1,19 +1,16 @@
-import classes from "./FormInput.module.scss";
+import { FormInputLabel, Group, Input } from "./FormInput.styles";
+
 const FormInput = ({ labelOptions, inputOptions }) => {
   return (
-    <div className={classes.group}>
-      <input {...inputOptions} className={classes["form-input"]} />
-      {labelOptions.label ? (
-        <label
-          htmlFor={labelOptions.htmlFor}
-          className={`${inputOptions.value.length ? classes.shrink : ""} ${
-            classes["form-input-label"]
-          }`}
-        >
+    <Group>
+      <Input {...inputOptions} />
+      {labelOptions.label && (
+        <FormInputLabel shrink={inputOptions.value.length}>
           {labelOptions.label}
-        </label>
-      ) : null}
-    </div>
+        </FormInputLabel>
+      )}
+    </Group>
   );
 };
+
 export default FormInput;
