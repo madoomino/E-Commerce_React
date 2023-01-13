@@ -4,8 +4,8 @@ import Logo from "../../assets/crown.svg";
 import CartDropDown from "../../components/CartDropDown/CartDropDown";
 import CartIcon from "../../components/CartIcon/CartIcon";
 import { CartContext } from "../../contexts/CartContext";
-import { UserContext } from "../../contexts/UserContext";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
+import { useSelector } from "react-redux";
 
 import {
   LogoContainer,
@@ -15,7 +15,7 @@ import {
 } from "./Navigation.styles";
 
 const Navigation = () => {
-  const { currentUser } = useContext(UserContext);
+  const { currentUser } = useSelector((store) => store.user);
   const { isCartOpen } = useContext(CartContext);
 
   return (
