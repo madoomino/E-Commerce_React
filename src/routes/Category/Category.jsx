@@ -14,7 +14,6 @@ const Category = () => {
   useEffect(() => {
     setProducts(categoriesMap[category]);
   }, [category, categoriesMap]);
-
   return (
     <Fragment>
       <Title>{category.toUpperCase()}</Title>

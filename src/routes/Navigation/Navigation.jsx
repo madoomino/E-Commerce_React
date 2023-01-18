@@ -1,11 +1,11 @@
-import { Fragment, useContext } from "react";
+import { Fragment } from "react";
+import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import Logo from "../../assets/crown.svg";
 import CartDropDown from "../../components/CartDropDown/CartDropDown";
 import CartIcon from "../../components/CartIcon/CartIcon";
-import { CartContext } from "../../contexts/CartContext";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
-import { useSelector } from "react-redux";
+import { selectIsCartOpen } from "../../store/cart/cart.selector";
 
 import {
   LogoContainer,
@@ -15,8 +15,8 @@ import {
 } from "./Navigation.styles";
 
 const Navigation = () => {
+  const isCartOpen = useSelector(selectIsCartOpen);
   const { currentUser } = useSelector((store) => store.user);
-  const { isCartOpen } = useContext(CartContext);
 
   return (
     <Fragment>
