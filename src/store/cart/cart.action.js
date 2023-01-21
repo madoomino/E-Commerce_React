@@ -56,4 +56,4 @@ export const deleteItemFromCart = (cartItems, cartItemToClear) => {
 };
 
 export const setIsCartOpen = (boolean) =>
-  createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, boolean);
+  createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN);

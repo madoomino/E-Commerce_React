@@ -10,7 +10,7 @@ const CartIcon = () => {
   const isCartOpen = useSelector(selectIsCartOpen);
   const dispatch = useDispatch();
   const cartCount = useSelector(selectCartCount);
-  const setIsCartOpenHandler = () => dispatch(setIsCartOpen(!isCartOpen));
+  const setIsCartOpenHandler = () => dispatch(setIsCartOpen());
   return (
     <CartIconContainer onClick={setIsCartOpenHandler}>
       <Img src={Icon} alt="shopping cart" />
