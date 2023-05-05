@@ -1,4 +1,3 @@
-import { getCategoriesAndDocuments } from "../../utils/firebase/firebase.utils";
 import { createAction } from "../../utils/reducer/reducer.utils";
 import { CART_ACTION_TYPES } from "./cart.types";
 

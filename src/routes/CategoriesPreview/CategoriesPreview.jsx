@@ -7,22 +7,24 @@ import {
   selectIsLoading,
 } from "../../store/categories/categories.selector";
 
-import {CategoriesContainer} from "./CategoriesPreview.styles";
+import { CategoriesContainer } from "./CategoriesPreview.styles";
 
 const CategoriesPreview = () => {
   const categoriesMap = useSelector(selectCategoriesMap);
   const isLoading = useSelector(selectIsLoading);
+  return (
+    <>
+      {
 
-  if (isLoading) {
-    return <Spinner />;
-  } else {
-    return (
-      <Fragment>
-        {Object.entries(categoriesMap).map(([title, products]) => (
-          <CategoryPreview title={title} products={products} key={title} />
-        ))}
-      </Fragment>
-    );
-  }
+        isLoading ? (<Spinner />) : (
+          <Fragment>
+            {Object.entries(categoriesMap).map(([title, products]) => (
+              <CategoryPreview title={title} products={products} key={title} />
+            ))}
+          </Fragment>
+        )
+      }
+    </>
+  )
 };
 export default CategoriesPreview;

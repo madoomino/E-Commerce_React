@@ -16,10 +16,6 @@ export const CartDropdownContainer = styled.div`
   right: 40px;
   z-index: 5;
   overflow: hidden;
-
-  @media screen and (min-width: 768px) {
-    max-width: 500px;
-  } 
 `;
 
 
