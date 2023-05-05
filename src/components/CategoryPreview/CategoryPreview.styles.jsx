@@ -14,12 +14,15 @@ export const Title = styled.h2`
 
 export const Preview = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 20px;
   width: 100%;
   margin: 0 auto;
 
-  @media screen and (max-width: 800px) {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  @media screen and (max-width: 480px) {
+    grid-template-columns: repeat(1, minmax(200px, 1fr));
+    ${Title}: {
+      text-align: center;
+    }
   }
 `;

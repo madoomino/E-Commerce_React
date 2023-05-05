@@ -73,6 +73,9 @@ export const CategoryContainer = styled.div`
   }
 
   @media only screen and (max-width: 768px) {
+    ${Body} {
+      padding-bottom: 4px;
+    }
     height: 180px;
     margin: 0 10px 20px;
     min-width: 45%;
@@ -81,6 +84,6 @@ export const CategoryContainer = styled.div`
   @media only screen and (max-width: 480px) {
     height: 140px;
     margin: 0 5px 15px;
-    min-width: 90%;
+    min-width: 110%;
   }
 `;

@@ -9,8 +9,6 @@ import CheckoutItem from "../../components/CheckoutItem/CheckoutItem";
 
 import {
   CheckoutContainer,
-  CheckoutHeader,
-  HeaderBlock,
   Total,
 } from "./Checkout.styles";
 
@@ -20,23 +18,6 @@ const Checkout = () => {
 
   return (
     <CheckoutContainer>
-      <CheckoutHeader>
-        <HeaderBlock>
-          <span>Product</span>
-        </HeaderBlock>
-        <HeaderBlock>
-          <span>Description</span>
-        </HeaderBlock>
-        <HeaderBlock>
-          <span>Quantity</span>
-        </HeaderBlock>
-        <HeaderBlock>
-          <span>Price</span>
-        </HeaderBlock>
-        <HeaderBlock>
-          <span>Remove</span>
-        </HeaderBlock>
-      </CheckoutHeader>
       {cartItems.map((cartItem) => (
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}

@@ -4,12 +4,12 @@ import {
   Preview,
   Title,
 } from "./CategoryPreview.styles";
+import { useNavigate } from "react-router-dom";
 const CategoryPreview = ({ title, products }) => {
+  const navigate = useNavigate();
   return (
     <CategoryPreviewContainer>
-      <h2>
-        <Title to={title}>{title.toUpperCase()}</Title>
-      </h2>
+        <Title onClick={() => navigate(title)}>{title.toUpperCase()}</Title>
       <Preview>
         {products.slice(0, 4).map((product) => (
           <ProductCard key={product.name} product={product} />
