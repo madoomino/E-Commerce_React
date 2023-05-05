@@ -21,6 +21,3 @@ export const selectCategoriesMap = createSelector(
     }, {});
   }
 );
-
-// export const selectCategories =
-//   ([categoriesReducerSelector], (categories) => categories.categories);

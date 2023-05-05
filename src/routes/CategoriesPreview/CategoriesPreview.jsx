@@ -6,6 +6,9 @@ import {
   selectCategoriesMap,
   selectIsLoading,
 } from "../../store/categories/categories.selector";
+
+import {CategoriesContainer} from "./CategoriesPreview.styles";
+
 const CategoriesPreview = () => {
   const categoriesMap = useSelector(selectCategoriesMap);
   const isLoading = useSelector(selectIsLoading);

@@ -1,6 +1,4 @@
-import styled from "styled-components";
-
-import { Link } from "react-router-dom";
+import styled from 'styled-components';
 
 export const BackgroundImage = styled.div`
   width: 100%;
@@ -10,7 +8,7 @@ export const BackgroundImage = styled.div`
   background-image: ${({ imageUrl }) => `url(${imageUrl})`};
 `;
 
-export const Body = styled(Link)`
+export const Body = styled.div`
   height: 90px;
   padding: 0 25px;
   display: flex;
@@ -33,6 +31,12 @@ export const Body = styled(Link)`
   p {
     font-weight: lighter;
     font-size: 16px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    height: 70px;
+    padding: 15px;
+    font-size: 14px;
   }
 `;
 
@@ -66,5 +70,17 @@ export const CategoryContainer = styled.div`
     ${Body} {
       opacity: 0.9;
     }
+  }
+
+  @media only screen and (max-width: 768px) {
+    height: 180px;
+    margin: 0 10px 20px;
+    min-width: 45%;
+  }
+
+  @media only screen and (max-width: 480px) {
+    height: 140px;
+    margin: 0 5px 15px;
+    min-width: 90%;
   }
 `;

@@ -6,7 +6,8 @@ export const CategoriesContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
 
-  @media only screen and (max-width: 768px) {
+  @media (max-width: 768px) {
     justify-content: center;
+    flex-wrap: wrap;
   }
 `;
