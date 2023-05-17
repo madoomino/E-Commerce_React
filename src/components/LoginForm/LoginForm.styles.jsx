@@ -1,18 +1,15 @@
 import styled from "styled-components";
 
-export const SignUpContainer = styled.div`
+export const SignInContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 480px;
+  align-items: center; /* Center the form vertically */
+  max-width: 380px;
   margin: 0 auto; /* Center the form horizontally */
   padding: 16px;
 
   h2 {
     margin: 10px 0;
-    text-align: center;
-  }
-  span {
-    text-align: center;
   }
 
   @media (max-width: 480px) {
@@ -23,7 +20,8 @@ export const SignUpContainer = styled.div`
 
 export const ButtonsContainer = styled.div`
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
+  justify-content: space-between; /* Spread the buttons horizontally */
 
   @media (max-width: 480px) {
     /* Styles for small screens */

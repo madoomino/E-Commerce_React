@@ -8,7 +8,8 @@ import {
 import { signInAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase.utils";
 import Button, { BUTTON_TYPE_CLASSES } from "../Button/Button";
 import FormInput from "../FormInput/FormInput";
-import { ButtonsContainer, SignInContainer } from "./SignInForm.styles";
+import { ButtonsContainer, SignInContainer } from "./LoginForm.styles";
+import { Link } from "react-router-dom";
 const SignInForm = () => {
   const dispatch = useDispatch();
   const logGoogleUserPopup = () => {
@@ -86,6 +87,10 @@ const SignInForm = () => {
           </Button>
         </ButtonsContainer>
       </form>
+      <p>
+        Don't have an account?{' '}
+        <Link to="/signup" style={{textDecoration: "underline"}}>Sign up</Link>
+      </p>
     </SignInContainer>
   );
 };

@@ -7,12 +7,13 @@ import {
 } from "../../utils/firebase/firebase.utils";
 import Button from "../Button/Button";
 import FormInput from "../FormInput/FormInput";
-import { SignUpContainer } from "./SignUpForm.styles";
+import { ButtonsContainer, SignUpContainer } from "./SignUpForm.styles";
 import {
   googleSignInStart,
   emailSignInStart,
   signUpStart,
 } from "../../store/user/user.action";
+import { Link } from "react-router-dom";
 const defaultFields = {
   displayName: "",
   email: "",
@@ -117,8 +118,13 @@ const SignUpForm = () => {
           }}
         />
 
+        <ButtonsContainer>
         <Button type="submit">Sign up</Button>
+        <p>Already a user? <Link to="/login" style={{textDecoration: "underline", color:"blue"}}>Sign in</Link></p>
+        </ButtonsContainer>
+        
       </form>
+      
     </SignUpContainer>
   );
 };
